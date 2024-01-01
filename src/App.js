@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import {useState} from 'react'
 function App() {
-  const [toDos,setTodos]=useState([])
-  const [toDo,setToDo]=useState('')
+  const [ToDos,setToDos]=useState([])
+  const [ToDo,setToDo]=useState('')
   return (
     <div className="app">
       <div className="mainHeading">
@@ -14,19 +14,37 @@ function App() {
         <h2>Whoop, it's Wednesday 🌝 ☕ </h2>
       </div>
       <div className="input">
-        <input value={toDo} onChange={(e)=>setToDo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
-        <i onClick={()=>setTodos ([...toDos,toDo])} className="fas fa-plus"></i>
+        <input value={ToDo} onChange={(e)=>setToDo(e.target.value)} type="text" placeholder="🖊️ Add item..." />
+        <i onClick={()=>setToDos ([...ToDos,{id:Date.now(), text:ToDo, status:false}])} className="fas fa-plus"></i>
       </div>
       <div className="todos">
-        <div className="todo">
+      {   ToDos.map((value)=>{ 
+
+        return (<div className="todo">
           <div className="left">
-            <input type="checkbox" name="" id="" />
-            <p>Rect tutorial</p>
+            <input onChange={(e)=>{
+              setToDos(ToDos.filter(
+                obj2=>{
+                  if(obj2.id===value.id){
+                    obj2.status=e.target.checked
+                  }
+                  return obj2
+                }
+              ))
+            }} value= {value.status} type="checkbox" name="" id="" />
+            <p>{value.text}</p>
           </div>
           <div className="right">
             <i className="fas fa-times"></i>
           </div>
-        </div>
+        </div>)
+      })}
+      {ToDos.map((value)=>{
+        if(value.status){
+          return(<h1>{value.text}</h1>)
+        }
+        return null 
+        })}
       </div>
     </div>
   );

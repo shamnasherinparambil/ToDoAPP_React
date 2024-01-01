@@ -39,7 +39,6 @@ h2 {
   align-items: center;
   border-radius: 6px;
   padding: 5px;
-  
 }
 
 .app .input input {
@@ -47,6 +46,7 @@ h2 {
   height: 1.6em;
   border-color: transparent;
   outline-color: transparent;
+  align-items: center;
 }
 
 .app i {
@@ -85,4 +85,7 @@ h2 {
   font-weight: 700;
   font-style: normal;
   color: grey;
+  align-items: center;
+  
 }
+
